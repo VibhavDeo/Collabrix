@@ -1,6 +1,7 @@
 import { BASE_URL } from "../config";
 
 const signup = async (user) => {
+  console.log("Sending data to backend:", user); // Debugging
   try {
     const res = await fetch(BASE_URL + "api/users/register", {
       method: "POST",

@@ -24,8 +24,8 @@ const buildToken = (user) => {
 
 const register = async (req, res) => {
   try {
-    const { username, email, password } = req.body;
-
+    const { username, email, password, businessName, location, points, expertise, tier } = req.body;
+    console.log("Received data:", req.body); // Debugging
     if (!(username && email && password)) {
       throw new Error("All input required");
     }
@@ -46,10 +46,15 @@ const register = async (req, res) => {
       username,
       email: normalizedEmail,
       password: hashedPassword,
+      businessName, 
+      location, 
+      expertise, 
+      tier,
+      points: 0
     });
 
     const token = jwt.sign(buildToken(user), process.env.TOKEN_KEY);
-
+    console.log("User created:", user); // Debugging
     return res.json(getUserDict(token, user));
   } catch (err) {
     return res.status(400).json({ error: err.message });

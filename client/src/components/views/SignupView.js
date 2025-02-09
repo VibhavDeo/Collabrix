@@ -17,6 +17,7 @@ import ErrorAlert from "../ErrorAlert";
 import { isLength, isEmail, contains } from "validator";
 
 const SignupView = () => {
+  
   const navigate = useNavigate();
   const [serverError, setServerError] = useState("");
   const [errors, setErrors] = useState({});
@@ -25,10 +26,23 @@ const SignupView = () => {
     username: "",
     email: "",
     password: "",
+    businessName:"",
+    location:"",
+    points: 0,
+    expertise: "",
+    tier:0
   });
 
+  // const handleChange = (e) => {
+  //   setFormData({ ...formData, [e.target.name]: e.target.value });
+  // };
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+    console.log(`${name}:`, value); // Logs the field name and updated value
   };
 
   const handleSubmit = async (e) => {
@@ -122,6 +136,33 @@ const SignupView = () => {
             onChange={handleChange}
             error={errors.password !== undefined}
             helperText={errors.password}
+          />
+          <TextField
+            required
+            fullWidth
+            name="businessName"
+            margin="normal"
+            id="outlined-required"
+            label="Business Name"
+            onChange={handleChange}
+          />
+          <TextField
+            required
+            fullWidth
+            margin="normal"
+            name="location"
+            id="outlined-required"
+            label="Location"
+            onChange={handleChange}
+          />
+          <TextField
+            fullWidth
+            required
+            margin="normal"
+            name="expertise"
+            id="outlined-required"
+            label="Expertise"
+            onChange={handleChange}
           />
           <ErrorAlert error={serverError} />
           <Button type="submit" fullWidth variant="contained" sx={{ my: 2 }}>

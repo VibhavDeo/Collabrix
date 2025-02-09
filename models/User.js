@@ -33,27 +33,21 @@ const UserSchema = new mongoose.Schema(
     },
     businessName: {
       type: String,
-      default: "",
     },
     location: {
       type: String,
-      default: "",
     },
     interests: {
       type: String,
-      default: "interest1,interest2",
     },
     expertise: {
       type: String,
-      default: "expertise1,expertise2",
     },
     points: {
-      type: String,
-      default: "0",
+      type: Number,
     },
     tier: {
-      type: String,
-      default: "tier0",
+      type: Number,
     },
     isAdmin: {
       type: Boolean,
