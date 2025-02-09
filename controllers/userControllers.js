@@ -108,7 +108,7 @@ const follow = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { userId, biography } = req.body;
+    const { userId, profileName, biography, business, revenue } = req.body;
 
     const user = await User.findById(userId);
 
@@ -116,13 +116,14 @@ const updateUser = async (req, res) => {
       throw new Error("User does not exist");
     }
 
-    if (typeof biography == "string") {
-      user.biography = biography;
-    }
+    if (profileName) user.profileName = profileName;
+    if (biography) user.biography = biography;
+    if (business) user.business = business;
+    if (revenue) user.revenue = revenue;
 
     await user.save();
 
-    return res.status(200).json({ success: true });
+    return res.status(200).json({ success: true, user });
   } catch (err) {
     return res.status(400).json({ error: err.message });
   }
