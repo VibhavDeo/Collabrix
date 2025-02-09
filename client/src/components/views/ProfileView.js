@@ -1,4 +1,4 @@
-import { Card, Container, Stack, Tab, Tabs } from "@mui/material";
+import { Card, Container, Stack, Tab, Tabs, Dialog, DialogActions, DialogContent, DialogTitle, Button } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import { getUser, updateUser } from "../../api/users";
@@ -16,6 +16,7 @@ import Navbar from "../Navbar";
 import PostBrowser from "../PostBrowser";
 import Profile from "../Profile";
 import ProfileTabs from "../ProfileTabs";
+import ProfileEditForm from "../ProfileEditForm";
 
 const ProfileView = () => {
   const [loading, setLoading] = useState(true);
@@ -24,6 +25,7 @@ const ProfileView = () => {
   const [tab, setTab] = useState("posts");
   const user = isLoggedIn();
   const [error, setError] = useState("");
+  const [openDialog, setOpenDialog] = useState(false);  // Manage dialog state
   const params = useParams();
   const navigate = useNavigate();
   const location = useLocation();
@@ -41,17 +43,23 @@ const ProfileView = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.target);
 
-    const content = e.target.content.value;
+    const updatedData = {
+      profileName: formData.get("profileName"),
+      biography: formData.get("biography"),
+      business: formData.get("business"),
+      revenue: formData.get("revenue"),
+    };
 
-    await updateUser(user, { biography: content });
+    await updateUser(user, updatedData);
 
-    setProfile({ ...profile, user: { ...profile.user, biography: content } });
-    setEditing(false);
+    setProfile({ ...profile, user: { ...profile.user, ...updatedData } });
+    setOpenDialog(false); // Close the dialog after submission
   };
 
   const handleEditing = () => {
-    setEditing(!editing);
+    setOpenDialog(true); // Open the dialog to edit profile
   };
 
   const handleMessage = () => {
@@ -61,16 +69,6 @@ const ProfileView = () => {
   useEffect(() => {
     fetchUser();
   }, [location]);
-
-  const validate = (content) => {
-    let error = "";
-
-    if (content.length > 250) {
-      error = "Bio cannot be longer than 250 characters";
-    }
-
-    return error;
-  };
 
   let tabs;
   if (profile) {
@@ -106,13 +104,11 @@ const ProfileView = () => {
               handleSubmit={handleSubmit}
               handleEditing={handleEditing}
               handleMessage={handleMessage}
-              validate={validate}
             />
             <Stack spacing={2}>
               {profile ? (
                 <>
                   <ProfileTabs tab={tab} setTab={setTab} />
-
                   {tabs[tab]}
                 </>
               ) : (
@@ -130,14 +126,33 @@ const ProfileView = () => {
               handleSubmit={handleSubmit}
               handleEditing={handleEditing}
               handleMessage={handleMessage}
-              validate={validate}
             />
-
             <FindUsers />
             <Footer />
           </Stack>
         }
       />
+
+      {/* Edit Profile Dialog */}
+      <Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
+        <DialogTitle>Edit Profile</DialogTitle>
+        <DialogContent>
+          {profile && (
+            <ProfileEditForm
+              profile={profile}
+              handleSubmit={handleSubmit}
+            />
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setOpenDialog(false)} color="secondary">
+            Cancel
+          </Button>
+          <Button onClick={handleSubmit} color="primary">
+            Save Changes
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Container>
   );
 };
