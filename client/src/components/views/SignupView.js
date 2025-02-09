@@ -4,23 +4,28 @@ import {
   Stack,
   TextField,
   Typography,
-  Link,
   Alert,
 } from "@mui/material";
 import { Box } from "@mui/system";
 import React, { useState } from "react";
 import { signup } from "../../api/users";
 import { loginUser } from "../../helpers/authHelper";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Copyright from "../Copyright";
 import ErrorAlert from "../ErrorAlert";
 import { isLength, isEmail, contains } from "validator";
+import { useTheme } from "@emotion/react";
 
 const SignupView = () => {
   
   const navigate = useNavigate();
+  const theme = useTheme();
   const [serverError, setServerError] = useState("");
   const [errors, setErrors] = useState({});
+    const [width, setWindowWidth] = useState(0);
+  
+  const mobile = width < 500;
+  const navbarWidth = width < 600;
 
   const [formData, setFormData] = useState({
     username: "",
@@ -88,9 +93,9 @@ const SignupView = () => {
   return (
     <Container maxWidth={"xs"} sx={{ mt: { xs: 2, md: 6 } }}>
       <Stack alignItems="center">
-        <Typography variant="h2" color="text.secondary" sx={{ mb: 6 }}>
-          <Link to="/" color="inherit" underline="none">
-            PostIt
+        <Typography variant="h2"  sx={{ color: theme.palette.primary.main,mb: 6 }}>
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            Collabrix
           </Link>
         </Typography>
         <Typography variant="h5" gutterBottom>

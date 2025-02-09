@@ -16,8 +16,11 @@ import ErrorAlert from "../ErrorAlert";
 import { loginUser } from "../../helpers/authHelper";
 import Copyright from "../Copyright";
 
+import { useTheme } from "@emotion/react";
+
 const LoginView = () => {
   const navigate = useNavigate();
+    const theme = useTheme();
 
   const [formData, setFormData] = useState({
     email: "",
@@ -45,9 +48,9 @@ const LoginView = () => {
   return (
     <Container maxWidth={"xs"} sx={{ mt: 6 }}>
       <Stack alignItems="center">
-        <Typography variant="h2" color="text.secondary" sx={{ mb: 6 }}>
-          <Link to="/" color="inherit" underline="none">
-            PostIt
+        <Typography variant="h2"  sx={{ color: theme.palette.primary.main,mb: 6 }}>
+          <Link to="/" style={{ textDecoration: "none", color: "inherit" }}>
+            Collabrix
           </Link>
         </Typography>
         <Typography variant="h5" gutterBottom>

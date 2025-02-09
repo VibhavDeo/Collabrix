@@ -85,13 +85,16 @@ const Navbar = () => {
             onClick={() => navigate("/")}
           />
           <Typography
-            sx={{ display: mobile ? "none" : "block" }}
+            sx={{
+              display: mobile ? "none" : "block",
+              mr: 1,
+              color: theme.palette.primary.main,
+              textDecoration: "none",  // Remove underline or any default link style
+            }}
             variant={navbarWidth ? "h6" : "h4"}
-            mr={1}
-            color={theme.palette.primary.main}
           >
             {/* <Link to="/" color="inherit"> */}
-              PostIt
+              Collabrix
             {/* </Link> */}
           </Typography>
         </HorizontalStack>
