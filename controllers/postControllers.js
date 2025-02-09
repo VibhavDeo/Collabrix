@@ -217,6 +217,17 @@ const getPosts = async (req, res) => {
       );
     }
 
+    if (userId) {
+      const user = await User.findById(userId).lean();  
+      const userInterest = user.interests || "";      
+      
+      if (userInterest && userInterest.trim() !== "") {
+        posts = posts.filter((post) =>
+          post.title.toLowerCase().includes(userInterest.toLowerCase())
+        );
+      }
+    }
+
     const count = posts.length;
 
     posts = paginate(posts, 10, page);
