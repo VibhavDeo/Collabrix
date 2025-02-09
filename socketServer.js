@@ -112,6 +112,7 @@ Important:
 - Format your answer in **Markdown**.
 - Use bullet points, bold text, headings, etc. if helpful.
 - No additional commentary outside your Markdown.
+- Now also if there is a user suggested for the asked query, for that user generate a link like this http://localhost:3000/users/{username} in markdown and provide it as part of response.
 
       `.trim();
 
@@ -136,7 +137,7 @@ Important:
       await chatSession.save();
 
       // emit back to client
-      socket.emit("chatbot-response", { user: "bot", message: botResponse });
+      socket.emit("chatbot-response", { user: "assistant", message: botResponse });
     } catch (error) {
       console.error("Chatbot Error:", error);
       socket.emit("chatbot-error", error?.message || "Unknown chatbot error");

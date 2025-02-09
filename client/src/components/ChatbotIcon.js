@@ -101,19 +101,21 @@ const ChatbotIcon = () => {
    * 4) Render function that uses ReactMarkdown for "assistant" messages
    *    so you can see bullet points, bold text, etc. if the bot returns Markdown.
    */
-  const renderMessageContent = (msg) => {
-    if (msg.sender === "assistant") {
-      // Render the bot's text as Markdown
-      return (
-        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-          {msg.text}
-        </ReactMarkdown>
-      );
-    } else {
-      // For user messages, just show raw text
-      return <ListItemText primary={msg.text} />;
-    }
-  };
+
+    const renderMessageContent = (msg) => {
+      if (msg.sender === "assistant") {
+        return (
+          <ReactMarkdown
+            remarkPlugins={[remarkGfm]}
+            components={{ p: ({ node, ...props }) => <Typography {...props} /> }}
+          >
+            {String(msg.text)}
+          </ReactMarkdown>
+        );
+      } else {
+        return <ListItemText primary={msg.text} />;
+      }
+    };
 
   return (
     <Box sx={{ position: "fixed", bottom: 16, right: 16, zIndex: 1000 }}>
