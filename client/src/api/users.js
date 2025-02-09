@@ -1,7 +1,7 @@
 // src/api/users.js
 import { BASE_URL } from "../config";
 
-const signup = async (user) => {
+export const signup = async (user) => {
   console.log("Sending data to backend:", user); // Debugging
   try {
     const res = await fetch(`${BASE_URL}api/users/register`, {
@@ -118,3 +118,5 @@ export const updateUser = async (user, data) => {
     return { error: err.message };
   }
 };
+
+// export { signup, login, getUser, getRandomUsers, updateUser };
