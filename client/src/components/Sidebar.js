@@ -8,6 +8,7 @@ import Footer from "./Footer";
 import Loading from "./Loading";
 import PostCard from "./PostCard";
 import TopPosts from "./TopPosts";
+import Chatbox from "./ChatbotIcon";
 
 const Sidebar = () => {
   return (
@@ -15,6 +16,7 @@ const Sidebar = () => {
       <TopPosts />
       <FindUsers />
       <Footer />
+      <Chatbox />
     </Stack>
   );
 };
