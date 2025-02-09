@@ -17,9 +17,9 @@ const ProfileEditForm = ({ profile, handleSubmit }) => {
     <Box component="form" onSubmit={handleSubmit}>
       <Stack spacing={2}>
         <TextField
-          label="Profile Name"
-          name="profileName"
-          value={formData.profileName}
+          label="username"
+          name="username"
+          value={formData.username}
           onChange={handleChange}
           fullWidth
         />
@@ -32,16 +32,30 @@ const ProfileEditForm = ({ profile, handleSubmit }) => {
           fullWidth
         />
         <TextField
-          label="Business"
-          name="business"
-          value={formData.business}
+          label="businessName"
+          name="businessName"
+          value={formData.businessName}
           onChange={handleChange}
           fullWidth
         />
         <TextField
-          label="Revenue"
-          name="revenue"
-          value={formData.revenue}
+          label="location"
+          name="location"
+          value={formData.location}
+          onChange={handleChange}
+          fullWidth
+        />
+        <TextField
+          label="interests"
+          name="interests"
+          value={formData.interests}
+          onChange={handleChange}
+          fullWidth
+        />
+        <TextField
+          label="expertise"
+          name="expertise"
+          value={formData.expertise}
           onChange={handleChange}
           fullWidth
         />

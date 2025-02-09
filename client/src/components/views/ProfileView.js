@@ -46,10 +46,12 @@ const ProfileView = () => {
     const formData = new FormData(e.target);
 
     const updatedData = {
-      profileName: formData.get("profileName"),
+      username: formData.get("username"),
       biography: formData.get("biography"),
-      business: formData.get("business"),
-      revenue: formData.get("revenue"),
+      businessName: formData.get("businessName"),
+      location: formData.get("location"),
+      interests: formData.get("interests"),
+      expertise: formData.get("expertise"),
     };
 
     await updateUser(user, updatedData);
