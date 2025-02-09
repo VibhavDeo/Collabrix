@@ -31,6 +31,30 @@ const UserSchema = new mongoose.Schema(
       default: "",
       maxLength: [250, "Must be at most 250 characters long"],
     },
+    businessName: {
+      type: String,
+      default: "",
+    },
+    location: {
+      type: String,
+      default: "",
+    },
+    interests: {
+      type: String,
+      default: "'interest1,interest2'",
+    },
+    expertise: {
+      type: String,
+      default: "'interest1,interest2'",
+    },
+    points: {
+      type: String,
+      default: "0",
+    },
+    tier: {
+      type: String,
+      default: "tier0",
+    },
     isAdmin: {
       type: Boolean,
       default: false,
