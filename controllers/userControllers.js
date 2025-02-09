@@ -113,7 +113,7 @@ const follow = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { userId, username, biography, businessName, location, interests, expertise } = req.body;
+    const { userId, username, biography, businessName, location, interests, expertise, rating } = req.body;
 
     const user = await User.findById(userId);
 
@@ -126,6 +126,18 @@ const updateUser = async (req, res) => {
     if (location) user.location = location;
     if (interests) user.interests = interests;
     if (expertise) user.expertise = expertise;
+    if (rating) {
+      user.points = user.points+rating;
+      if(user.points>=10 && user.points<20 ){
+        user.tier = 1;
+      }
+      if(user.points>=20 && user.points<30){
+        user.tier = 2;
+      }
+      if(user.points>=30){
+        user.tier = 3;
+      }
+    }
 
     await user.save();
 
