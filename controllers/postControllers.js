@@ -196,6 +196,7 @@ const getUserLikedPosts = async (req, res) => {
 const getPosts = async (req, res) => {
   try {
     const { userId } = req.body;
+    console.log(req.body)
 
     let { page, sortBy, author, search, liked } = req.query;
 
@@ -206,9 +207,9 @@ const getPosts = async (req, res) => {
       .populate("poster", "-password")
       .sort(sortBy)
       .lean();
-
+    console.log(posts)
     if (author) {
-      posts = posts.filter((post) => post.poster.username == author);
+      posts = posts?.filter((post) => post.poster?.username === author) || [];
     }
 
     if (search) {
@@ -237,7 +238,7 @@ const getPosts = async (req, res) => {
     }
 
     await enrichWithUserLikePreview(posts);
-
+    console.log(posts)
     return res.json({ data: posts, count });
   } catch (err) {
     console.log(err.message);

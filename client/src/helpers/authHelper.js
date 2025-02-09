@@ -16,10 +16,7 @@ export const isLoggedIn = () => {
  * Saves user to localStorage and initiates socket connection.
  */
 export const loginUser = (user) => {
-  if (!user || !user.token) {
-    console.error("loginUser called without a valid user token:", user);
-    return;
-  }
+ 
   localStorage.setItem("user", JSON.stringify(user));
   initiateSocketConnection();
 };
@@ -30,5 +27,6 @@ export const loginUser = (user) => {
  */
 export const logoutUser = () => {
   localStorage.removeItem("user");
-  disconnectSocket();
+  initiateSocketConnection();
+ 
 };

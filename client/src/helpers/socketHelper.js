@@ -15,10 +15,7 @@ export let socket = null;
 export const initiateSocketConnection = () => {
   const user = isLoggedIn(); // e.g. { token: "...", username: "john", userId: "123" }
 
-  if (!user || !user.token) {
-    console.warn("initiateSocketConnection called without a valid token.");
-    return;
-  }
+  
 
   // If already connected, disconnect first
   if (socket) {
@@ -27,7 +24,8 @@ export const initiateSocketConnection = () => {
 
   socket = io(BASE_URL, {
     auth: {
-      token: user.token,
+      token: user && user.token,
+
     },
     reconnection: true,
     reconnectionAttempts: 5,

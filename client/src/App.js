@@ -35,10 +35,10 @@ import { io } from "socket.io-client";
 function App() {
   useEffect(() => {
     const user = isLoggedIn();
-    if (user && user.token) {
-      // If user is already logged in, reconnect the socket
-      initiateSocketConnection();
-    }
+    
+    // If user is already logged in, reconnect the socket
+    initiateSocketConnection();
+    
   }, []);
 
   return (

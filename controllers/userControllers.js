@@ -114,7 +114,7 @@ const follow = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { userId, username, biography, businessName, location, interests, expertise, rating } = req.body;
-
+    console.log(req.body)
     const user = await User.findById(userId);
 
     if (!user) {
@@ -193,10 +193,13 @@ const getFollowing = async (req, res) => {
 const getUser = async (req, res) => {
   try {
     const username = req.params.username;
+    console.log(username)
 
     const user = await User.findOne({ username }).select("-password");
+    console.log(user)
 
     if (!user) {
+      console.log("he;;")
       throw new Error("User does not exist");
     }
 
@@ -218,6 +221,8 @@ const getUser = async (req, res) => {
         data: posts,
       },
     };
+    console.log("nifnvsijfdnsfjnv")
+    console.log(data)
 
     return res.status(200).json(data);
   } catch (err) {
