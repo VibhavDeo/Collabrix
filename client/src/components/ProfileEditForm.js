@@ -3,10 +3,12 @@ import React, { useState } from "react";
 
 const ProfileEditForm = ({ profile, handleSubmit }) => {
   const [formData, setFormData] = useState({
-    profileName: profile?.user?.profileName || "",
+    username: profile?.user?.username || "",
     biography: profile?.user?.biography || "",
-    business: profile?.user?.business || "",
-    revenue: profile?.user?.revenue || "",
+    businessName: profile?.user?.businessName || "",
+    location: profile?.user?.location || "",
+    interests: profile?.user?.interests || "",
+    expertise: profile?.user?.expertise || "",
   });
 
   const handleChange = (e) => {

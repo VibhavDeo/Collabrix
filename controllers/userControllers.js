@@ -108,18 +108,19 @@ const follow = async (req, res) => {
 
 const updateUser = async (req, res) => {
   try {
-    const { userId, profileName, biography, business, revenue } = req.body;
+    const { userId, username, biography, businessName, location, interests, expertise } = req.body;
 
     const user = await User.findById(userId);
 
     if (!user) {
       throw new Error("User does not exist");
     }
-
-    if (profileName) user.profileName = profileName;
+    if (username) user.username = username;
     if (biography) user.biography = biography;
-    if (business) user.business = business;
-    if (revenue) user.revenue = revenue;
+    if (businessName) user.businessName = businessName;
+    if (location) user.location = location;
+    if (interests) user.interests = interests;
+    if (expertise) user.expertise = expertise;
 
     await user.save();
 

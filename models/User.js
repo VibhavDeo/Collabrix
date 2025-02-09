@@ -41,11 +41,11 @@ const UserSchema = new mongoose.Schema(
     },
     interests: {
       type: String,
-      default: "'interest1,interest2'",
+      default: "interest1,interest2",
     },
     expertise: {
       type: String,
-      default: "'interest1,interest2'",
+      default: "expertise1,expertise2",
     },
     points: {
       type: String,
