@@ -114,7 +114,7 @@ const follow = async (req, res) => {
 const updateUser = async (req, res) => {
   try {
     const { userId, username, biography, businessName, location, interests, expertise, rating } = req.body;
-    console.log(req.body)
+    console.log("Helllo")
     const user = await User.findById(userId);
 
     if (!user) {
@@ -138,7 +138,7 @@ const updateUser = async (req, res) => {
         user.tier = 3;
       }
     }
-
+    console.log(user)
     await user.save();
 
     return res.status(200).json({ success: true, user });

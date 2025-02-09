@@ -17,6 +17,7 @@ import PostBrowser from "../PostBrowser";
 import Profile from "../Profile";
 import ProfileTabs from "../ProfileTabs";
 import ProfileEditForm from "../ProfileEditForm";
+import ReviewStars from "../ReviewStars";
 
 const ProfileView = () => {
   const [loading, setLoading] = useState(true);
@@ -130,7 +131,7 @@ const ProfileView = () => {
               handleMessage={handleMessage}
             />
             <FindUsers />
-            <Footer />
+            <ReviewStars />
           </Stack>
         }
       />

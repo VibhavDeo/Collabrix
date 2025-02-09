@@ -1,7 +1,7 @@
 // src/api/users.js
 import { BASE_URL } from "../config";
 
-export const signup = async (user) => {
+ const signup = async (user) => {
   console.log("Sending data to backend:", user); // Debugging
   try {
     const res = await fetch(`${BASE_URL}api/users/register`, {
@@ -30,7 +30,7 @@ export const signup = async (user) => {
  * POST to /api/users/login
  * Returns JSON { token, username, userId, ... } on success or { error } on failure.
  */
-export const login = async (user) => {
+ const login = async (user) => {
   try {
     const res = await fetch(`${BASE_URL}api/users/login`, {
       method: "POST",
@@ -58,7 +58,7 @@ export const login = async (user) => {
  * GET /api/users/:id
  * returns user info or { error }
  */
-export const getUser = async (params) => {
+const getUser = async (params) => {
   try {
     const res = await fetch(`${BASE_URL}api/users/${params.id}`);
     if (!res.ok) {
@@ -76,7 +76,7 @@ export const getUser = async (params) => {
  * getRandomUsers(query):
  * GET /api/users/random?...
  */
-export const getRandomUsers = async (query) => {
+ const getRandomUsers = async (query) => {
   try {
     const url = `${BASE_URL}api/users/random?${new URLSearchParams(query)}`;
     const res = await fetch(url);
@@ -91,12 +91,8 @@ export const getRandomUsers = async (query) => {
   }
 };
 
-/**
- * updateUser(user, data):
- * PATCH /api/users/:id
- * 'user' = { _id, token, ... }
- */
-export const updateUser = async (user, data) => {
+const updateUser = async (user, data) => {
+  console.log("log user.id: ", user._id);
   try {
     const res = await fetch(`${BASE_URL}api/users/${user._id}`, {
       method: "PATCH",
@@ -118,5 +114,4 @@ export const updateUser = async (user, data) => {
     return { error: err.message };
   }
 };
-
-// export { signup, login, getUser, getRandomUsers, updateUser };
+export { signup, login, getUser, getRandomUsers, updateUser };

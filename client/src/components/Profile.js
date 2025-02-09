@@ -53,6 +53,7 @@ const Profile = (props) => {
               {user.biography}
             </Typography>
           ) : (
+            
             <Typography variant="p">
               <i>No bio yet</i>
             </Typography>
