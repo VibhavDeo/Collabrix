@@ -22,6 +22,8 @@ import ProfileView from "./components/views/ProfileView";
 import LoginView from "./components/views/LoginView";
 import SignupView from "./components/views/SignupView";
 import ExploreView from "./components/views/ExploreView";
+import { isLoggedIn } from "./helpers/authHelper";
+
 import PrivateRoute from "./components/PrivateRoute";
 import SearchView from "./components/views/SearchView";
 import MessengerView from "./components/views/MessengerView";
@@ -31,7 +33,13 @@ import { BASE_URL } from "./config";
 import { io } from "socket.io-client";
 
 function App() {
-  initiateSocketConnection();
+  useEffect(() => {
+    const user = isLoggedIn();
+    if (user && user.token) {
+      // If user is already logged in, reconnect the socket
+      initiateSocketConnection();
+    }
+  }, []);
 
   return (
     <ThemeProvider theme={theme}>
